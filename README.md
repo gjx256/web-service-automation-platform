@@ -17,11 +17,14 @@
 - **Automation**: Shell (Bash)
 
 ## 🚀 快速开始
-bash
+
+```bash
 git clone https://github.com/gjx256/web-service-automation-platform.git
 cd web-service-automation-platform
 chmod +x deploy.sh
 sudo ./deploy.sh
+```
+
 
 ##⚙️ 环境变量配置
 生产环境请通过 .env 文件或 Systemd 的 EnvironmentFile 注入敏感信息，切勿硬编码。
