@@ -17,7 +17,7 @@ RCON_HOST = '127.0.0.1'
 RCON_PORT = 25575
 RCON_PASS = os.getenv('RCON_PASS', 'CHANGE_ME_RCON_PASSWORD')
 
-# 新增：管理后台简易密码（建议改成你自己的，面试时可以说"生产环境会放环境变量"）
+# 白名单管理后台简易密码
 ADMIN_PASS = os.getenv('ADMIN_PASS', 'CHANGE_ME_ADMIN_PASSWORD')
 
 # ========== 前端页面 ==========
@@ -55,7 +55,7 @@ HTML_FORM = '''
 </html>
 '''
 
-# 管理后台页（新增）
+# 白名单管理后台页
 ADMIN_HTML = '''
 <!DOCTYPE html>
 <html>
@@ -97,7 +97,7 @@ ADMIN_HTML = '''
 </html>
 '''
 
-# ========== 原有接口 ==========
+# ========== 接口 ==========
 
 @app.route('/')
 def index():
@@ -144,7 +144,7 @@ def register():
     flash(f'✅ 恭喜 "{mc_name}"，白名单添加成功！请重启游戏或输入 /reload 生效。', 'ok')
     return redirect(url_for('index'))
 
-# ========== 新增：管理后台接口 ==========
+# ========== 管理白名单网页后台接口 ==========
 
 @app.route('/admin')
 def admin_list():
@@ -187,7 +187,7 @@ def admin_delete(user_id):
     except Exception as e:
         return f"数据库操作失败: {e}", 500
 
-    # 3. RCON移除白名单（适配你的 OriginXWhitelist 插件）
+    # 3. RCON移除白名单（适配 OriginXWhitelist 插件）
     try:
         mcr = MCRcon(RCON_HOST, RCON_PASS, port=RCON_PORT)
         mcr.connect()
